@@ -1,3 +1,5 @@
+Trong đây có một file gọi là "25152.html". Mình sẽ edit, chỉnh sửa và update file này.
+
 Mình sẽ tải link layout website từ trang canva này:
 https://canva.link/0rsvvqr5vw0vix2
 

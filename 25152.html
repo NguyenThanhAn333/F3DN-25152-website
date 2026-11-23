@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FPT 3 Da Nang</title>
+  <style>
+    :root {
+      --text: #111827;
+      --text-muted: #6b7280;
+      --nav-height: 72px;
+      --max-width: 1280px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: var(--nav-height);
+      background: #ffffff;
+    }
+
+    body {
+      background: #ffffff;
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--nav-height);
+      background: linear-gradient(90deg, #4b6bfb 0%, #3b56d9 35%, #23307c 70%, #151c48 100%);
+      box-shadow: 0 2px 12px rgba(15, 23, 42, 0.18);
+    }
+
+    .nav-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .brand img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      transition: transform 0.2s ease;
+    }
+
+    .brand:hover img {
+      transform: scale(1.05);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    nav a {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #c7d2fe;
+      white-space: nowrap;
+      transition: color 0.2s ease, background-color 0.2s ease;
+    }
+
+    nav li:nth-child(5) a,
+    nav li:nth-child(6) a {
+      color: #a78bfa;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      cursor: pointer;
+      place-items: center;
+    }
+
+    #home {
+      position: relative;
+      overflow: hidden;
+      min-height: calc(100vh - var(--nav-height));
+      background: #0f172a;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    #home .hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    #home::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 85%, rgba(15, 19, 28, 0.45) 0%, transparent 60%),
+        linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.28) 0%,
+          rgba(255, 255, 255, 0.04) 30%,
+          rgba(20, 24, 33, 0.25) 65%,
+          rgba(15, 19, 28, 0.62) 100%
+        );
+      pointer-events: none;
+    }
+
+    .hero-caption {
+      position: relative;
+      z-index: 1;
+      padding: clamp(28px, 5vh, 56px) 24px 0;
+      text-align: center;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.35rem, 2.8vw, 2.35rem);
+      font-weight: 700;
+      color: #3649cc;
+      letter-spacing: 0.01em;
+      text-shadow: 0 2px 10px rgba(255, 255, 255, 0.85);
+      margin-bottom: 4px;
+    }
+
+    .hero-title {
+      font-size: clamp(3.25rem, 7.5vw, 5.75rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: 0.03em;
+      background: linear-gradient(90deg, #f152ff 0%, #9b4dff 35%, #3b5bff 68%, #1ee2ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 3px 10px rgba(15, 23, 42, 0.18));
+    }
+
+    .blank-section {
+      min-height: 100vh;
+      background: #ffffff;
+    }
+
+    @media (max-width: 900px) {
+      .menu-toggle {
+        display: grid;
+      }
+
+      nav {
+        position: absolute;
+        top: var(--nav-height);
+        left: 0;
+        right: 0;
+        background: #1a2359;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+        padding: 12px 24px;
+        display: none;
+      }
+
+      nav.open {
+        display: block;
+      }
+
+      nav ul {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+      }
+
+      nav a {
+        display: block;
+        padding: 10px 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-inner">
+      <a href="#home" class="brand" aria-label="F3DN 25152 Home">
+        <img src="./Images/F3DN%20logo.jpg" alt="F3DN 25152 Logo">
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="4" y1="7" x2="20" y2="7"></line>
+          <line x1="4" y1="12" x2="20" y2="12"></line>
+          <line x1="4" y1="17" x2="20" y2="17"></line>
+        </svg>
+      </button>
+
+      <nav id="siteNav">
+        <ul>
+          <li><a href="#home" class="active">Trang chủ</a></li>
+          <li><a href="#about">Về chúng tôi</a></li>
+          <li><a href="#achievements">Thành tích</a></li>
+          <li><a href="#contact">Liên hệ</a></li>
+          <li><a href="#community">Cộng đồng</a></li>
+          <li><a href="#games">Trò chơi</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="home">
+      <img class="hero-bg" src="./Images/Home%20image.jpg" alt="F3DN Team 25152">
+      <div class="hero-caption">
+        <p class="hero-subtitle">Chào mừng bạn đến với đội</p>
+        <h1 class="hero-title">F3DN</h1>
+      </div>
+    </section>
+
+    <section id="about" class="blank-section" aria-label="Về chúng tôi"></section>
+    <section id="achievements" class="blank-section" aria-label="Thành tích"></section>
+    <section id="contact" class="blank-section" aria-label="Liên hệ"></section>
+    <section id="community" class="blank-section" aria-label="Cộng đồng"></section>
+    <section id="games" class="blank-section" aria-label="Trò chơi"></section>
+  </main>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const siteNav = document.getElementById("siteNav");
+    const navLinks = Array.from(siteNav.querySelectorAll("a"));
+    const sections = Array.from(document.querySelectorAll("main section"));
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = siteNav.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        siteNav.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    const updateActiveNav = () => {
+      const scrollPos = window.scrollY + 140;
+      let currentId = sections[0].id;
+      for (const section of sections) {
+        if (scrollPos >= section.offsetTop) {
+          currentId = section.id;
+        }
+      }
+      navLinks.forEach((link) => {
+        link.classList.toggle("active", link.getAttribute("href") === `#${currentId}`);
+      });
+    };
+
+    window.addEventListener("scroll", updateActiveNav, { passive: true });
+    updateActiveNav();
+  </script>
+</body>
+</html>
